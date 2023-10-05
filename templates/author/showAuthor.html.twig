@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Author Details{% endblock %}
+
+{% block body %}
+    <h1>Author {{authors[id].username}}</h1>
+    
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Nombre de Livres</th>
+        </tr>
+        
+            <tr>
+                <td>{{ authors[id].id }}</td>
+                <td><img src="{{ asset(authors[id].picture) }}" alt="{{ authors[id].username }}" width="100"></td>
+                <td>{{ authors[id].username|upper }}</td>
+                <td>{{ authors[id].email }}</td>
+                <td>{{ authors[id].nb_books }}</td>
+                
+            </tr>
+        
+    </table>
+
+{% endblock %}

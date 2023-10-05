@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AuthorController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <table border="2">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Picture</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Number of Books</th>
+            <th>Détails</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for author in authors %}
+            <tr>
+                <td>{{ author.id }}</td>
+                <td><img src="{{ asset(author.picture) }}" alt="{{ author.username }}'s picture" width="100"></td>
+                <td>{{ author.username|upper }}</td>
+                <td>{{ author.email }}</td>
+                <td>{{ author.nb_books }}</td>
+                <td><a href="{{path('authorDetails',{id:author.id})}}">Details</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>nombre d'auteurs : {{nbauthors}}</p>
+<p>nombre total des livres : {{nbbooks}}</p>
+
+</div>
+{% endblock %}

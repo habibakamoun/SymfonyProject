@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des livres{% endblock %}
+
+{% block body %}
+    <h1>List of Books</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>author_ID</th>
+            <th>Ref</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Published</th>
+            <th>Actions</th>
+            
+        </tr>
+        {% set nbPublished = 0 %}
+        {% set nbNPublished = 0 %}
+        {% for book in books %}
+            {% if book.Published == 1 %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.author.username }}</td>
+                <td>{{ book.ref }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.category }}</td>
+                {% if book.Published == 1 %}
+                {% set nbPublished = nbPublished + 1 %}
+                <td>Yes</td>
+                {% else %}
+                <td>No</td>
+                {% endif %}
+                <td><a href="{{path("update",{id:book.id})}}">Update</a>
+                <a href="{{path("delete",{id:book.id})}}">Delete</a>
+                <a href="{{path("details",{id:book.id})}}">Show</a></td>
+            </tr>
+            {% else %}
+            {% set nbNPublished = nbNPublished + 1 %}
+          {% endif %}
+        {% endfor %}
+         
+    </table>
+<p>Number of published books: {{nbPublished}}</p>
+<p>Number of non-published books:  {{nbNPublished}}</p>
+<a href="{{path(("addBook"))}}">Create new</a>
+{% endblock %}
+
